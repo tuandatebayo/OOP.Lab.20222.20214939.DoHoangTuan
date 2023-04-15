@@ -1,5 +1,5 @@
 import javax.swing.JOptionPane;
-public class SolveEquation {
+public ex226class SolveEquation {
  public static void main(String[] args){
   String choose = JOptionPane.showInputDialog(null, "Which equation do you want to solve: \n1. The first-degree equation (linear equation) with one variable \n2. The system of first-degree equations (linear system) with two variables \n3. The second-degree equation with one variable", "Solve", JOptionPane.INFORMATION_MESSAGE);
   String msg = "";
