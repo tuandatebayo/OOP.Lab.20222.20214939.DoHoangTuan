@@ -1,0 +1,5 @@
+Java is a "pass by value" language, which means that a copy of the value of the variable is passed to a method rather than a reference to the original variable itself.
+
+In the swap method, the values of o1 and o2 are swapped, but these changes are not reflected outside of the method because only the copies of the values were swapped, not the original variables.
+
+In the changeTitle method, the dvd variable is passed by value, but the method itself changes the state of the object referred to by the dvd reference. However, when a new DigitalVideoDisc object is created inside the method, it does not affect the original dvd variable that was passed to the method.
