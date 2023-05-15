@@ -8,7 +8,7 @@ public class DigitalVideoDisc {
 	private float cost;
 	
 	private static int nbDigitalVideoDiscs = 0; // class attribute
-    private int id; // instance attribute
+	private int id; // instance attribute
 	
 	public String getTitle() {
 		return title;
