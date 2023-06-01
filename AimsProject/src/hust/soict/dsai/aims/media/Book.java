@@ -3,11 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 public class Book extends Media {
 	
-	public Book(String title, String category, float cost) {
-		super(title, category, cost);
+	public Book(int id, String title, String category, float cost) {
+		super(id, title, category, cost);
 	
 	}
-
+	public Book(int id, String title, String category, float cost, List<String> authors) {
+		super(id, title, category, cost);
+		this.authors = authors;
+	}
+	public Book(int id, String title, String category, List<String> authors, float cost) {
+		super(id, title, category, cost);
+		this.authors = authors;
+	}
 	private List<String> authors = new ArrayList<String>();
 	
 	public List<String> getAuthors() {
@@ -21,7 +28,7 @@ public class Book extends Media {
 
 	
 	public void addAuthor(String authorName) {
-		if (authors.contains(authorName)){
+		if (!authors.contains(authorName)){
 			authors.add(authorName);
 			System.out.println("The author has been added.");
 		}
@@ -41,4 +48,7 @@ public class Book extends Media {
 		}
 	}
 	
+	public String toString() {
+	    return this.getId()+ " - " + this.getTitle() + " - " + this.getCategory() + ": " + this.getCost() +"$";
+	}
 }

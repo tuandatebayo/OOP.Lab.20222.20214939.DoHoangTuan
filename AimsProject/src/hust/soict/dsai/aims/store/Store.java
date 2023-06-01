@@ -1,36 +1,49 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import java.util.ArrayList;
+
+import hust.soict.dsai.aims.media.Media;
 
 public class Store {
-	private DigitalVideoDisc itemsInStore[] = new DigitalVideoDisc[100];
+	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 	
-	private int qtyAdded;
-	
-	public void addDVD(DigitalVideoDisc disc) {
-		if (qtyAdded < 100) {
-			itemsInStore[qtyAdded++] = disc;
-            System.out.println("The disc has been added.");
-        } else {
-            System.out.println("The store is almost full.");
-        }
+	public void addMedia(Media media) {
+		if (itemsInStore.contains(media)) {
+	        System.out.println("The item has already existed.");
+		}
+		else {
+			itemsInStore.add(media);
+	        System.out.println("The item has been added.");
+	        
+		}
+		
 	}
-	public void removeDVD(DigitalVideoDisc disc) {
-        boolean found = false;
-        for (int i = 0; i < qtyAdded; i++) {
-            if (itemsInStore[i] == disc) {
-                found = true;
-                qtyAdded--;
-                for (int j = i; j < qtyAdded; j++) {
-                	itemsInStore[j] = itemsInStore[j + 1];
-                }
-                itemsInStore[qtyAdded] = null;
-                System.out.println("The disc has been removed.");
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("The disc is not in the store.");
-        }
-    }
+	
+	public void removeMedia(Media media) {
+		if (itemsInStore.contains(media)) {
+			itemsInStore.remove(media);
+	        System.out.println("The item has been removed.");
+		}
+		else {
+			System.out.println("The item is not in the store.");
+		}
+	}
+
+	public void printStore() {
+		// TODO Auto-generated method stub
+		for (Media items: itemsInStore) {
+			System.out.println(items.getTitle());
+		}
+		
+	}
+	
+	public Media searchMedia(String title) {
+		for (Media items: itemsInStore) {
+			if (title.equalsIgnoreCase(items.getTitle())) {
+				return items;	
+			}	
+		}
+		return null;
+
+	}
 
 }
