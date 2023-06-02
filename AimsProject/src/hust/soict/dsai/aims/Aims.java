@@ -13,6 +13,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Aims {
+	
+	static Scanner scanner = new Scanner(System.in);
+	static Store store = new Store();
+	static Cart cart = new Cart();
+	
 	public static void showMenu() {
 		System.out.println("AIMS: ");
 		System.out.println("--------------------------------");
@@ -27,8 +32,9 @@ public class Aims {
 		System.out.println("Items in the store:");
         store.printStore();
         storeMenu();
-        Scanner scanner = new Scanner(System.in);
+
         int choice = scanner.nextInt();
+        scanner.nextLine();
         while (choice != 0) {
             switch (choice) {
                 case 1:
@@ -46,14 +52,13 @@ public class Aims {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
+         storeMenu();
          choice = scanner.nextInt();
-
-	
+         scanner.nextLine();
 	}
 	}
-        
 		public static void seeMediaDetails() {
-            Scanner scanner = new Scanner(System.in);
+
             System.out.print("Enter the title of the media: ");
             String title = scanner.nextLine();
             Media media = store.searchMedia(title);
@@ -62,6 +67,7 @@ public class Aims {
                 if (media instanceof Disc) {
                 	mediaDetailsMenu();
                     int choice = scanner.nextInt();
+                    scanner.nextLine();
                     switch (choice) {
                         case 1:
                             cart.addMedia(media);
@@ -80,6 +86,7 @@ public class Aims {
                     System.out.println("Please choose a number: 0 - 1");
 
                     int choice = scanner.nextInt();
+                    scanner.nextLine();
                     if (choice == 1) {
                     	cart.addMedia(media);
                     }
@@ -99,9 +106,8 @@ public class Aims {
             }
         }
         
-        
         public static void addToCart() {
-            Scanner scanner = new Scanner(System.in);
+
             System.out.print("Enter the title of the media: ");
             String title = scanner.nextLine();
 
@@ -115,7 +121,7 @@ public class Aims {
         }
         
         public static void playMedia() {
-            Scanner scanner = new Scanner(System.in);
+
             System.out.print("Enter the title of the media: ");
             String title = scanner.nextLine();
 
@@ -135,11 +141,10 @@ public class Aims {
 		System.out.println("0. Back");
 		System.out.println("--------------------------------");
 		System.out.println("Please choose a number: 0-1-2");
-		
-		Scanner scanner = new Scanner(System.in);
         System.out.print("Choose options: ");
         int choice = scanner.nextInt();
-        while (choice != 0) {
+        scanner.nextLine();
+        
             switch (choice) {
                 case 1:
                 	addMediaToStore();
@@ -152,13 +157,11 @@ public class Aims {
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
-            }
-        
 		}
     }
     
     public static void addMediaToStore() {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter the type of the media: ");
         String type = scanner.nextLine();
         System.out.print("Enter the title of the media: ");
@@ -180,24 +183,26 @@ public class Aims {
             scanner.nextLine(); // Consume the remaining newline character
             System.out.print("Enter the authors of the book: ");
             String authors = scanner.nextLine();
-
-            media = new Book(id, title, category, cost); //maybe some author
+            List<String> authorsList = new ArrayList<>();
+        	authorsList.add(authors);
+            media = new Book(id, title, category, cost, authorsList); 
         } else if (category.equalsIgnoreCase("compactdisc")) {
             scanner.nextLine(); // Consume the remaining newline character
             System.out.print("Enter the director of the DVD: ");
             String director = scanner.nextLine();
             System.out.print("Enter the length of the DVD: ");
             int length = scanner.nextInt();
+            scanner.nextLine();
             System.out.print("Enter the artist of the CD: ");
             String artist = scanner.nextLine();
-
-            media = new CompactDisc(title, category, director, length, cost);
+            media = new CompactDisc(title, category, director, artist, length, cost);
         } else if (category.equalsIgnoreCase("digitalvideodisc")) {
             scanner.nextLine(); // Consume the remaining newline character
             System.out.print("Enter the director of the DVD: ");
             String director = scanner.nextLine();
             System.out.print("Enter the length of the DVD: ");
             int length = scanner.nextInt();
+            scanner.nextLine();
 
             media = new DigitalVideoDisc(title, category, director, length, cost);
         }
@@ -211,7 +216,7 @@ public class Aims {
     }
     
     public static void removeMediaFromStore() {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter the title of the media: ");
         String title = scanner.nextLine();
 
@@ -230,8 +235,8 @@ public class Aims {
         cart.printCart();
         cartMenu();
         
-        Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
+        scanner.nextLine();
 
         while (choice != 0) {
             switch (choice) {
@@ -253,11 +258,13 @@ public class Aims {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
+            cartMenu();
             choice = scanner.nextInt();
+            scanner.nextLine();
     }
     }
     
-    public static ArrayList<Media> filterMediasInCart() {
+    public static void filterMediasInCart() {
         System.out.println("Filter options:");
         System.out.println("--------------------------------");
         System.out.println("1. Filter by ID");
@@ -266,7 +273,6 @@ public class Aims {
         System.out.println("--------------------------------");
         System.out.println("Please choose a number: 0-1-2");
 
-        Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character after reading the integer
 
@@ -276,6 +282,7 @@ public class Aims {
             case 1:
                 System.out.print("Enter media ID: ");
                 int id = scanner.nextInt();
+                scanner.nextLine();
                 for (Media media : cart.getItemsInCart()) {
                     if (media.getId() == id) {
                         filteredList.add(media);
@@ -295,14 +302,22 @@ public class Aims {
 
             case 0:
                 cartMenu();
-                break;
+                return;
 
             default:
                 System.out.println("Invalid choice. Please try again.");
                 filterMediasInCart();
-                break;
+                return;
         }
-        return filteredList;
+
+        if (filteredList.isEmpty()) {
+            System.out.println("No media found matching the filter criteria.");
+        } else {
+            System.out.println("Filtered Media List:");
+            for (Media media : filteredList) {
+                System.out.println(media);
+            }
+        }
     }
     
     public static void sortMediasInCart() {
@@ -314,7 +329,6 @@ public class Aims {
         System.out.println("--------------------------------");
         System.out.println("Please choose a number: 0-1-2");
         
-        Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
@@ -334,11 +348,10 @@ public class Aims {
             sortMediasInCart();
             return;
     }
-        
     }
     
     public static void removeMediaFromCart() {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter the title of the media: ");
         String title = scanner.nextLine();
 
@@ -353,9 +366,15 @@ public class Aims {
     }
     
     public static void placeOrder() {
+    	if (cart.isEmpty()) {
+            System.out.println("The cart is empty. Unable to place an order.");
+            return;
+        }
         System.out.println("Placing order...");
         System.out.println("Order placed successfully.");
         System.out.println("Thank you!");
+        cart.clearCart();
+        main(null);
     }
         
 	public static void storeMenu() {
@@ -393,11 +412,6 @@ public class Aims {
 		System.out.println("Please choose a number: 0-1-2-3-4-5");
 		}
 	
-	
-	
-	static Store store = new Store();
-	static Cart cart = new Cart();
-	
 
 	public static void main(String[] args) {
         /*
@@ -405,10 +419,10 @@ public class Aims {
         List<String> authors = new ArrayList<>();
     	authors.add("Herbert Schildt");
     	authors.add("John Doe");
-    	DigitalVideoDisc dvd1 = new DigitalVideoDisc(1,"The Avengers", "Action", "Joss Whedon", 142, 19.99f);
-        CompactDisc dvd2 = new CompactDisc(2,"Inception", "Sci-Fi", "Christopher Nolan", 148, 14.99f);
-        Book book1 = new Book(3,"Java: A Beginner's Guide", "Herbert Schildt", authors, 29.99f);
-        Book book2 = new Book(4,"Clean Code: A Handbook of Agile Software Craftsmanship", "ad",authors, 49.99f);
+    	DigitalVideoDisc dvd1 = new DigitalVideoDisc(1,"Avengers", "Action", "Joss Whedon", 142, 19.99f);
+        CompactDisc dvd2 = new CompactDisc(2,"SlamDunk", "Animation", "Inoue Takehiko", 148, 14.99f);
+        Book book1 = new Book(3,"Java", "Herbert Schildt", authors, 29.99f);
+        Book book2 = new Book(4,"Clean", "ad",authors, 49.99f);
         
         // Add media instances to the store
         store.addMedia(dvd1);
@@ -417,8 +431,9 @@ public class Aims {
         store.addMedia(book2);
         */
         showMenu();
-        Scanner scanner = new Scanner(System.in);
+
         int choice = scanner.nextInt();
+        scanner.nextLine();
 
         while (choice != 0) {
             switch (choice) {
@@ -437,12 +452,11 @@ public class Aims {
 
             showMenu();
             choice = scanner.nextInt();
+            scanner.nextLine();
         }
 
         System.out.println("Exiting the program. Goodbye!");
     }
-	
-
 }
 
 
