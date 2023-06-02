@@ -31,7 +31,7 @@ public class Store {
 	public void printStore() {
 		// TODO Auto-generated method stub
 		for (Media items: itemsInStore) {
-			System.out.println(items.getTitle());
+			System.out.println("- " + items.getTitle());
 		}
 		
 	}

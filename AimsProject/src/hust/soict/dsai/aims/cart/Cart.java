@@ -47,6 +47,27 @@ public class Cart {
 	    System.out.println("***************************************************");
 	}
 	
+	public Media searchMedia(String title) {
+		for (Media items: itemsOrdered) {
+			if (title.equalsIgnoreCase(items.getTitle())) {
+				return items;	
+			}	
+		}
+		return null;
+
+	}
+	public ArrayList<Media> getItemsInCart(){
+		return itemsOrdered;
+	} 
+	public boolean isEmpty() {
+	    return itemsOrdered.isEmpty();
+	}
+	public void clearCart() {
+		itemsOrdered.clear();
+	}
+
+	
+	/*
 	public void searchByID(int id) {
 	    boolean found = false;
 	    for (Media item: itemsOrdered) 
@@ -72,19 +93,6 @@ public class Cart {
 	        System.out.println("No item with title \"" + title + "\" found in the cart.");
 	    }
 	}
-	
-	public Media searchMedia(String title) {
-		for (Media items: itemsOrdered) {
-			if (title.equalsIgnoreCase(items.getTitle())) {
-				return items;	
-			}	
-		}
-		return null;
-
-	}
-	public ArrayList<Media> getItemsInCart(){
-		return itemsOrdered;
-	} 
-
+	*/
 	
 }

@@ -366,9 +366,15 @@ public class Aims {
     }
     
     public static void placeOrder() {
+    	if (cart.isEmpty()) {
+            System.out.println("The cart is empty. Unable to place an order.");
+            return;
+        }
         System.out.println("Placing order...");
         System.out.println("Order placed successfully.");
         System.out.println("Thank you!");
+        cart.clearCart();
+        main(null);
     }
         
 	public static void storeMenu() {
@@ -408,13 +414,13 @@ public class Aims {
 	
 
 	public static void main(String[] args) {
-        
+        /*
         //example to test
         List<String> authors = new ArrayList<>();
     	authors.add("Herbert Schildt");
     	authors.add("John Doe");
     	DigitalVideoDisc dvd1 = new DigitalVideoDisc(1,"Avengers", "Action", "Joss Whedon", 142, 19.99f);
-        CompactDisc dvd2 = new CompactDisc(2,"Inception", "Sci-Fi", "Christopher Nolan", 148, 14.99f);
+        CompactDisc dvd2 = new CompactDisc(2,"SlamDunk", "Animation", "Inoue Takehiko", 148, 14.99f);
         Book book1 = new Book(3,"Java", "Herbert Schildt", authors, 29.99f);
         Book book2 = new Book(4,"Clean", "ad",authors, 49.99f);
         
@@ -423,7 +429,7 @@ public class Aims {
         store.addMedia(dvd2);
         store.addMedia(book1);
         store.addMedia(book2);
-        
+        */
         showMenu();
 
         int choice = scanner.nextInt();
