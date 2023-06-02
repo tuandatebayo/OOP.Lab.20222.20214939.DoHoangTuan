@@ -8,7 +8,7 @@ If the passing object is not an instance of Media, it returns False.
 
 11. Observe what happens and explain in detail
 
-
+Each type will return their toString method.
 The toString() method is overridden in a subclass to provide a string more detail about of the object.
 
 12.

@@ -41,7 +41,7 @@ public class Cart {
 	    System.out.println("***********************CART***********************");
 	    System.out.println("Ordered Items:");
 	    for (Media item: itemsOrdered) {
-	        item.toString();
+	    	System.out.println(item.toString());
 	    }
 	    System.out.println("Total cost: " + totalCost() +"$");
 	    System.out.println("***************************************************");
