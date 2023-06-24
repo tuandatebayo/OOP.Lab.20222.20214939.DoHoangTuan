@@ -1,11 +1,12 @@
 package hust.soict.dsai.aims.cart;
 
-import java.util.ArrayList;
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
 	private final int MAX_NUMBER_ORDERED = 20;
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>(MAX_NUMBER_ORDERED);
+	private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 	
 	public void addMedia(Media media) {
 		if (itemsOrdered.size() < MAX_NUMBER_ORDERED) {
@@ -56,7 +57,7 @@ public class Cart {
 		return null;
 
 	}
-	public ArrayList<Media> getItemsInCart(){
+	public ObservableList<Media> getItemsInCart(){
 		return itemsOrdered;
 	} 
 	public boolean isEmpty() {
@@ -65,34 +66,4 @@ public class Cart {
 	public void clearCart() {
 		itemsOrdered.clear();
 	}
-
-	
-	/*
-	public void searchByID(int id) {
-	    boolean found = false;
-	    for (Media item: itemsOrdered) 
-	        if (item.getId() == id) {
-	            System.out.println("Found item with ID" + id + ": " + item.toString());
-	            found = true;
-	            break;
-	        }
-	    
-	    if (!found) {
-	        System.out.println("No item with ID " + id + " found in the cart.");
-	    }
-	}
-	public void searchByTitle(String title) {
-	    boolean found = false;
-	    for (Media item: itemsOrdered) 
-	        if (item.getTitle().equalsIgnoreCase(title)) {
-	            found = true;
-	            System.out.println("Found item with title \"" + title + "\": " + item.toString());
-	        }															
-	    
-	    if (!found) {
-	        System.out.println("No item with title \"" + title + "\" found in the cart.");
-	    }
-	}
-	*/
-	
 }

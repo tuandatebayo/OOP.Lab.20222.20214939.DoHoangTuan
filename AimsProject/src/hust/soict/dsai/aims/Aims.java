@@ -414,7 +414,7 @@ public class Aims {
 	
 
 	public static void main(String[] args) {
-        /*
+        
         //example to test
         List<String> authors = new ArrayList<>();
     	authors.add("Herbert Schildt");
@@ -429,7 +429,7 @@ public class Aims {
         store.addMedia(dvd2);
         store.addMedia(book1);
         store.addMedia(book2);
-        */
+        
         showMenu();
 
         int choice = scanner.nextInt();
