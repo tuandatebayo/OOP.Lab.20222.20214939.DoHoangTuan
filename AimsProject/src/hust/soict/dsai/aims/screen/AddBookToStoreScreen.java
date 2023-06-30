@@ -14,22 +14,33 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
 
     public AddBookToStoreScreen(Store store) {
         super(store);
-        setTitle("Add Book to Store");
-        setSize(400, 250);
+        Container cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+		
+		cp.add(createNorth(), BorderLayout.NORTH);
+		cp.add(createCenter(), BorderLayout.CENTER);
+		cp.add(createButtonPanel(),BorderLayout.SOUTH);
+		setVisible(true);
+		setTitle("Add Book To Store Screen");
+		setSize(600,400);
     }
 
     @Override
-    protected JPanel createFormPanel() {
+    protected JPanel createCenter() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(4, 2, 10, 10));
-
+        
+        JLabel idLabel = new JLabel("Id:");
+        idTextField = new JTextField();
         JLabel titleLabel = new JLabel("Title:");
         titleTextField = new JTextField();
         JLabel categoryLabel = new JLabel("Category:");
         categoryTextField = new JTextField();
         JLabel costLabel = new JLabel("Cost:");
         costTextField = new JTextField();
-
+        
+        formPanel.add(idLabel);
+        formPanel.add(idTextField);
         formPanel.add(titleLabel);
         formPanel.add(titleTextField);
         formPanel.add(categoryLabel);
@@ -55,4 +66,5 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
 
         return new Book(number, title, category, cost);
     }
+
 }

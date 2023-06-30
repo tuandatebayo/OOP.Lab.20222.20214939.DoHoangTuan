@@ -49,16 +49,11 @@ public abstract class Media {
 	}
 
 	public boolean equals(Object obj) {
-	    if (this == obj) {
-	        return true;
-	    }
-
-	    if (!(obj instanceof Media)) {
-	        return false;
-	    }
-
-	    Media other = (Media) obj;
-	    return title.equals(other.title);
+		if(obj instanceof Media) {
+			Media media = (Media) obj;
+			return media.getTitle().equals(this.getTitle());
+		}
+		return false;
 	}
 	
 	public static void main(String[] args) {

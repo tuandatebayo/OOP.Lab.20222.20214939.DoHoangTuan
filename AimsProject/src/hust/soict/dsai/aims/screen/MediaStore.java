@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.naming.LimitExceededException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -63,7 +64,12 @@ public class MediaStore extends JPanel {
 			String button = e.getActionCommand();
 			if (button.equals("Add to cart")) {
 				// Add media to the cart
-	            cart.addMedia(media);
+	            try {
+					cart.addMedia(media);
+				} catch (LimitExceededException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	            System.out.println("Added to cart: " + media.getTitle());
 	         // Show a dialog to announce that the item has been successfully added to the cart
                 JOptionPane.showMessageDialog(null, "Item added to cart: " + media.getTitle(), "Add to Cart",

@@ -16,12 +16,19 @@ public class AddCompactDiscToStoreScreen extends AddItemToStoreScreen {
 
     public AddCompactDiscToStoreScreen(Store store) {
         super(store);
-        setTitle("Add Compact Disc to Store");
-        setSize(400, 300);
+        Container cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+		
+		cp.add(createNorth(), BorderLayout.NORTH);
+		cp.add(createCenter(), BorderLayout.CENTER);
+		cp.add(createButtonPanel(),BorderLayout.SOUTH);
+		setVisible(true);
+		setTitle("Add CD To Store Screen");
+		setSize(600,400);
     }
 
     @Override
-    protected JPanel createFormPanel() {
+    protected JPanel createCenter() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(5, 2, 10, 10));
 
