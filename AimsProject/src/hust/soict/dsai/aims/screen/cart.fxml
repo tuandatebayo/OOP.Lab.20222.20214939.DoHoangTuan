@@ -27,12 +27,12 @@
                   <items>
                       <Menu mnemonicParsing="false" text="Update Store">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Add Book" />
-                          <MenuItem mnemonicParsing="false" text="Add CD" />
-                              <MenuItem mnemonicParsing="false" text="Add DVD" />
+                          <MenuItem mnemonicParsing="false" onAction="#addBook" text="Add Book" />
+                          <MenuItem mnemonicParsing="false" onAction="#addCd" text="Add CD" />
+                              <MenuItem mnemonicParsing="false" onAction="#addDvd" text="Add DVD" />
                         </items>
                       </Menu>
-                    <MenuItem mnemonicParsing="false" text="View Store" />
+                    <MenuItem mnemonicParsing="false" onAction="#viewStore" text="View Store" />
                         <MenuItem mnemonicParsing="false" text="View Cart" />
                   </items>
                 </Menu>
@@ -64,7 +64,7 @@
                </padding>
                <children>
                   <Label text="Filter:" />
-                  <TextField />
+                  <TextField fx:id="tfFilter" />
                   <RadioButton mnemonicParsing="false" selected="true" text="By ID">
                      <toggleGroup>
                         <ToggleGroup fx:id="filterCategory" />

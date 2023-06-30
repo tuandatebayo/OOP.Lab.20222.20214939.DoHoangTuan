@@ -51,24 +51,37 @@ public class StoreScreen extends JFrame {
 //        menu.add(smUpdateStore);
 ////        menu.add(createMenuItem("View store", ViewStoreScreen.class));
 ////        menu.add(createMenuItem("View cart", ViewCartScreen.class));
-//
+//        
+//        
 //        JMenuBar menuBar = new JMenuBar();
 //        menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 //        menuBar.add(menu);
-//
+//        
 //        return menuBar;
 //    }
 	  JMenuBar createMenuBar() {
 	  JMenu menu = new JMenu("Options");
 	
 	  JMenu smUpdateStore = new JMenu("Update Store");
-	  smUpdateStore.add("Add Book");
-	  smUpdateStore.add("Add CD");
-	  smUpdateStore.add("Add DVD");
+	  
+	  JMenuItem addBook = new JMenuItem("Add Book");
+	  smUpdateStore.add(addBook);
+	  addBook.addActionListener(new addBookListener());
+	  
+	  JMenuItem addCd = new JMenuItem("Add CD");
+	  smUpdateStore.add(addCd);
+	  addCd.addActionListener(new addCdListener());
+	  
+	  JMenuItem addDvd = new JMenuItem("Add DVD");
+	  smUpdateStore.add(addDvd);
+	  addDvd.addActionListener(new addDvdListener());
 	
 	  menu.add(smUpdateStore);
-	  menu.add("View store");
-	  menu.add("View cart");
+	  JMenuItem viewStore = new JMenuItem("View Store");
+      menu.add(viewStore);
+      JMenuItem viewCart= new JMenuItem("View Cart");
+      menu.add(viewCart);
+      viewCart.addActionListener(new viewCartListener());
 	
 	  JMenuBar menuBar = new JMenuBar();
 	  menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -102,6 +115,7 @@ public class StoreScreen extends JFrame {
 		title.setForeground(Color.CYAN);
 		
 		JButton cart = new JButton("View cart");
+		cart.addActionListener(new viewCartListener());
 		cart.setPreferredSize(new Dimension(100, 50));
 		cart.setMaximumSize(new Dimension(100,50));
 		
@@ -127,6 +141,39 @@ public class StoreScreen extends JFrame {
 		return center;
 		
 	}
+	protected class addBookListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new AddBookToStoreScreen(store);
+        }
+    }
+
+	protected class addCdListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new AddCompactDiscToStoreScreen(store);
+        }
+    }
+
+    protected class addDvdListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new AddDigitalVideoDiscToStoreScreen(store);
+        }
+    }
+    
+    private class viewCartListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+            new CartScreen(cart, store);
+        }
+    }
+    //you are already view store so dont implement anymore
+    
 	public StoreScreen(Store store, Cart cart) {
 		// TODO Auto-generated constructor stub
 		this.store = store;
@@ -150,10 +197,10 @@ public class StoreScreen extends JFrame {
 	    Book book = new Book(8,"Dark", "Psychology", 55.6f);
 	    Book book1 = new Book(9,"Light", "Psychology", 55.6f);
 	    DigitalVideoDisc dvd1 = new DigitalVideoDisc(1,"dvd1", "Animation","Inoue",120, 1563.6f );
-	    DigitalVideoDisc dvd2 = new DigitalVideoDisc(2,"dvd2", "Animation","Inoue",120, 1563.6f );
-	    DigitalVideoDisc dvd3 = new DigitalVideoDisc(3,"dvd3", "Animation","Inoue",120, 1563.6f );
-	    DigitalVideoDisc dvd4 = new DigitalVideoDisc(4,"dvd4", "Animation","Inoue",120, 1563.6f );
-	    DigitalVideoDisc dvd5 = new DigitalVideoDisc(5,"dvd5", "Animation","Inoue",120, 1563.6f );
+	    DigitalVideoDisc dvd2 = new DigitalVideoDisc(2,"dvd2", "Bnimation","Inoue",120, 156.6f );
+	    DigitalVideoDisc dvd3 = new DigitalVideoDisc(3,"dvd3", "Cnimation","Inoue",120, 163.6f );
+	    DigitalVideoDisc dvd4 = new DigitalVideoDisc(4,"dvd4", "Dnimation","Inoue",120, 563.6f );
+	    DigitalVideoDisc dvd5 = new DigitalVideoDisc(5,"dvd5", "Enimation","Inoue",120, 63.6f );
 	    // Add some media objects to the list
 	    mediae.add(cd);
 	    mediae.add(dvd);

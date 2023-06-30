@@ -2,8 +2,9 @@ package hust.soict.dsai.aims.screen;
 
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
-
+import hust.soict.dsai.aims.store.Store;
 import hust.soict.dsai.aims.cart.Cart;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,12 +14,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class CartScreenController {
 	private Cart cart;
+	private Store store;
+	
 	@FXML
 	private Button btnPlay;
 	@FXML
@@ -36,9 +38,10 @@ public class CartScreenController {
     @FXML
     private TableColumn<Media, String> colMediacategory;
 
-    public CartScreenController(Cart cart) {
+    public CartScreenController(Cart cart, Store store) {
     	super();
     	this.cart = cart;
+    	this.store = store;
     }
     
     @FXML
@@ -113,5 +116,32 @@ public class CartScreenController {
             totalCost += media.getCost();
         }
         return totalCost;
+    }
+
+    @FXML
+    void viewStore(ActionEvent event) {
+//    	JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor((Button) btnPlaceOrder);
+//        currentFrame.dispose(); // Close the current cart screen
+//    	CartScreen cartScreen = (CartScreen) ((Button) event.getSource()).getScene().getWindow();
+//        cartScreen.close(); // Close the CartScreen window
+    	new StoreScreen(store, cart);
+    }
+    @FXML
+    void addBook(ActionEvent event) {
+    	new AddBookToStoreScreen(store);
+    }
+
+    @FXML
+    void addCd(ActionEvent event) {
+    	new AddCompactDiscToStoreScreen(store);
+    }
+
+    @FXML
+    void addDvd(ActionEvent event) {
+    	new AddDigitalVideoDiscToStoreScreen(store);
+    }
+    
+    void viewCart() {
+    	//already viewed cart
     }
 }

@@ -15,13 +15,20 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
     private JTextField costTextField;
 
     public AddDigitalVideoDiscToStoreScreen(Store store) {
-        super(store);
-        setTitle("Add Digital Video Disc to Store");
-        setSize(400, 300);
+    	super(store);
+        Container cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+		
+		cp.add(createNorth(), BorderLayout.NORTH);
+		cp.add(createCenter(), BorderLayout.CENTER);
+		cp.add(createButtonPanel(),BorderLayout.SOUTH);
+		setVisible(true);
+		setTitle("Add DVD To Store Screen");
+		setSize(600,400);
     }
 
     @Override
-    protected JPanel createFormPanel() {
+    protected JPanel createCenter() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(5, 2, 10, 10));
 
